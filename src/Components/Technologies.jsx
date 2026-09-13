@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import technologies from "../data/technologies.json";
 
 const Technologies = () => {
@@ -10,6 +11,7 @@ const Technologies = () => {
     );
 
     if (alreadyAdded) {
+      toast.warning(`${technology.name} is already in your stack!`);
       return;
     }
 
@@ -17,18 +19,28 @@ const Technologies = () => {
       ...selectedTechnologies,
       technology,
     ]);
+
+    toast.success(`${technology.name} added to your stack!`);
   };
 
   const handleRemove = (id) => {
+    const technology = selectedTechnologies.find(
+      (item) => item.id === id
+    );
+
     const remainingTechnologies = selectedTechnologies.filter(
       (item) => item.id !== id
     );
 
     setSelectedTechnologies(remainingTechnologies);
+
+    toast.info(`${technology.name} removed from your stack!`);
   };
 
   const handleRemoveAll = () => {
     setSelectedTechnologies([]);
+
+    toast.info("All technologies removed from your stack!");
   };
 
   return (
@@ -59,7 +71,7 @@ const Technologies = () => {
               {technologies.map((technology) => (
                 <div
                   key={technology.id}
-                  className="card bg-white border border-gray-200 shadow-sm"
+                  className="card bg-white border border-gray-200 shadow-md"
                 >
                   <div className="card-body">
 
@@ -128,7 +140,7 @@ const Technologies = () => {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="card bg-white border border-gray-200 shadow-sm sticky top-24">
+            <div className="card bg-white border border-gray-200 shadow-md sticky top-24">
 
               <div className="card-body">
 
