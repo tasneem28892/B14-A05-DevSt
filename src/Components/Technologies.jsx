@@ -8,14 +8,10 @@ const Technologies = () => {
   const [selectedTechnologies, setSelectedTechnologies] = useState([]);
 
   useEffect(() => {
-    const loadTechnologies = () => {
-      setTimeout(() => {
-        setTechnologies(technologiesData);
-        setLoading(false);
-      }, 500);
-    };
-
-    loadTechnologies();
+    setTimeout(() => {
+      setTechnologies(technologiesData);
+      setLoading(false);
+    }, 500);
   }, []);
 
   const handleAddToStack = (technology) => {
@@ -56,11 +52,11 @@ const Technologies = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-12 sm:py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <div className="mb-10">
-          <h1 className="text-3xl md:text-4xl font-bold mb-3">
+        <div className="mb-8 sm:mb-10">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3">
             <span className="text-gray-900">
               Explore the{" "}
             </span>
@@ -70,41 +66,41 @@ const Technologies = () => {
             </span>
           </h1>
 
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-base sm:text-lg">
             Pick one technology per category to build your stack
           </p>
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center py-24">
+          <div className="flex justify-center items-center py-20 sm:py-24">
             <span className="loading loading-spinner loading-lg text-primary"></span>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
 
             <div className="lg:col-span-3">
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
 
                 {technologies.map((technology) => (
                   <div
                     key={technology.id}
                     className="card bg-white border border-gray-200 shadow-md"
                   >
-                    <div className="card-body">
+                    <div className="card-body p-5 sm:p-6">
 
-                      <div className="flex justify-between items-start">
+                      <div className="flex justify-between items-start gap-3">
                         <img
                           src={technology.icon}
                           alt={technology.name}
-                          className="w-12 h-12 object-contain"
+                          className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
                         />
 
-                        <span className="badge badge-outline">
+                        <span className="badge badge-outline text-xs sm:text-sm">
                           {technology.badge}
                         </span>
                       </div>
 
-                      <h3 className="card-title mt-3">
+                      <h3 className="card-title mt-3 text-lg sm:text-xl">
                         {technology.name}
                       </h3>
 
@@ -112,12 +108,12 @@ const Technologies = () => {
                         {technology.description}
                       </p>
 
-                      <div className="flex justify-between items-center mt-3">
-                        <span className="badge badge-ghost">
+                      <div className="flex flex-wrap justify-between items-center gap-2 mt-3">
+                        <span className="badge badge-ghost text-xs sm:text-sm">
                           {technology.category}
                         </span>
 
-                        <span className="text-sm">
+                        <span className="text-sm whitespace-nowrap">
                           ⭐ {technology.rating}
                         </span>
                       </div>
@@ -134,7 +130,7 @@ const Technologies = () => {
                         disabled={selectedTechnologies.some(
                           (item) => item.id === technology.id
                         )}
-                        className={`btn btn-sm mt-2 border-none ${
+                        className={`btn btn-sm mt-2 border-none w-full ${
                           selectedTechnologies.some(
                             (item) => item.id === technology.id
                           )
@@ -157,12 +153,12 @@ const Technologies = () => {
             </div>
 
             <div className="lg:col-span-1">
-              <div className="card bg-white border border-gray-200 shadow-md sticky top-24">
+              <div className="card bg-white border border-gray-200 shadow-md lg:sticky lg:top-24">
 
-                <div className="card-body">
+                <div className="card-body p-5 sm:p-6">
 
-                  <div className="flex justify-between items-center">
-                    <h2 className="card-title">
+                  <div className="flex justify-between items-center gap-3">
+                    <h2 className="card-title text-lg sm:text-xl">
                       Your Stack
                     </h2>
 
@@ -176,7 +172,7 @@ const Technologies = () => {
                   </p>
 
                   {selectedTechnologies.length === 0 ? (
-                    <div className="text-center py-10">
+                    <div className="text-center py-8 sm:py-10">
                       <p className="text-gray-400 text-sm">
                         Your stack is empty.
                       </p>
@@ -191,18 +187,18 @@ const Technologies = () => {
                       {selectedTechnologies.map((technology) => (
                         <div
                           key={technology.id}
-                          className="flex items-center justify-between border border-gray-200 rounded-lg p-3"
+                          className="flex items-center justify-between gap-3 border border-gray-200 rounded-lg p-3"
                         >
 
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-3 min-w-0">
                             <img
                               src={technology.icon}
                               alt={technology.name}
-                              className="w-8 h-8 object-contain"
+                              className="w-8 h-8 object-contain shrink-0"
                             />
 
-                            <div>
-                              <h3 className="font-medium text-sm">
+                            <div className="min-w-0">
+                              <h3 className="font-medium text-sm truncate">
                                 {technology.name}
                               </h3>
 
@@ -214,7 +210,7 @@ const Technologies = () => {
 
                           <button
                             onClick={() => handleRemove(technology.id)}
-                            className="btn btn-xs btn-circle btn-ghost"
+                            className="btn btn-xs btn-circle btn-ghost shrink-0"
                           >
                             ✕
                           </button>
